@@ -6,8 +6,7 @@
 
 This repository is intended for hosting the release binaries and any issues or discussions raised by developers.
 
-## Installation
-**Prerequisites:** Ensure that you have Go installed on your system.
+Installation (Not yet available, but coming soon)
 
 1. Using `homebrew` (MacOS, Linux):
    ```bash
