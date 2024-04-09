@@ -6,11 +6,17 @@
 
 This repository is intended for hosting the release binaries and any issues or discussions raised by developers.
 
-## Installation (Not yet available, but coming soon)
+## Installation
 
-1. Using `homebrew` (MacOS, Linux):
+- Using `homebrew` (MacOS, Linux):
    ```bash
+   brew tap fetchai/avctl
    brew install avctl
+
+- Using chocolatey (Windows, coming soon):
+   ```
+   choco install avctl
+   ```
 
 ## Quick Start
 
