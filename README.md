@@ -13,7 +13,7 @@ This repository is intended for hosting the release binaries and any issues or d
    brew tap fetchai/avctl
    brew install avctl
 
-- Using chocolatey:
+- Using chocolatey (Windows):
    ```
    choco install avctl
    ```
