@@ -97,10 +97,11 @@ Copy the thin rule into your agent project:
 
 ```bash
 mkdir -p .cursor/rules
-cp /path/to/avctl/assets/avctl-ide.mdc .cursor/rules/avctl-ide.mdc
+curl -fsSL -o .cursor/rules/avctl-ide.mdc \
+  https://raw.githubusercontent.com/fetchai/avctl/main/assets/avctl-ide.mdc
 ```
 
-(Download [`assets/avctl-ide.mdc`](../assets/avctl-ide.mdc) from this repository into `.cursor/rules/` until a future `avctl ide setup` command writes it for you.)
+(Or copy [`assets/avctl-ide.mdc`](../assets/avctl-ide.mdc) from this repo until a future `avctl ide setup` command writes it for you.)
 
 ## From the Agentverse UI
 
