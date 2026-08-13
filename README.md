@@ -19,6 +19,25 @@ This repository is intended for hosting the release binaries and any issues or d
    choco install avctl
    ```
 
+
+## IDE setup (Cursor and other AI assistants)
+
+Use AVCTL from your IDE so an assistant can create, deploy, check logs, and iterate on hosted agents.
+
+Full guide: **[docs/ide-setup.md](docs/ide-setup.md)**
+
+Thin Cursor rule: **[assets/avctl-ide.mdc](assets/avctl-ide.mdc)** (copy into your project’s `.cursor/rules/`).
+
+Quick path:
+
+1. Install AVCTL (Brew / Chocolatey above)
+2. `avctl auth login`
+3. `avctl hosting init` or `avctl hosting pull -a <agent_address>`
+4. Open the folder in Cursor
+5. Loop: edit → `avctl hosting deploy` → `avctl hosting logs -f` → fix → repeat
+
+Do **not** clone `agentverse-core` or build AVCTL from source for this workflow.
+
 ## Get Started
 
 ### Individual Agent Management
