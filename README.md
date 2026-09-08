@@ -34,6 +34,14 @@ Manual download asset names:
 brew install fetchai/avctl/avctl
 ```
 
+### Windows (no package manager)
+
+```powershell
+Invoke-WebRequest -UseBasicParsing https://github.com/fetchai/avctl/releases/latest/download/install.ps1 | Invoke-Expression
+```
+
+Installs into `%LOCALAPPDATA%\Programs\avctl` (override with `AVCTL_INSTALL_DIR`) and adds that directory to the user `PATH`; open a new terminal so the change takes effect. To pin a version: set `$env:AVCTL_VERSION="v0.1.17"` first. When running a downloaded copy of the script instead of piping it, use `powershell -ExecutionPolicy Bypass -File install.ps1`.
+
 ### Windows (Chocolatey)
 
 ```bash
