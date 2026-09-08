@@ -8,16 +8,39 @@ This repository is intended for hosting the release binaries and any issues or d
 
 ## Installation
 
-- Using `homebrew` (MacOS, Linux):
-   ```bash
-   brew tap fetchai/avctl
-   brew install avctl
-   ```
+### macOS / Linux (install script)
 
-- Using chocolatey (Windows):
-   ```
-   choco install avctl
-   ```
+Installs the latest release binary into `~/.local/bin` (override with `AVCTL_INSTALL_DIR`). No package manager or root required:
+
+```bash
+curl -fsSL https://github.com/fetchai/avctl/releases/latest/download/install.sh | sh
+```
+
+To pin a version: set `AVCTL_VERSION=v0.1.17` before the command. The manual-download table below lists the asset names for direct download.
+
+Manual download asset names:
+
+| OS | Architecture | Asset |
+| --- | --- | --- |
+| macOS | Apple Silicon | `avctl_Darwin_arm64.tar.gz` |
+| macOS | Intel | `avctl_Darwin_x86_64.tar.gz` |
+| Linux | 64-bit (x86_64) | `avctl_Linux_x86_64.tar.gz` |
+| Linux | ARM64 | `avctl_Linux_arm64.tar.gz` |
+| Windows | 64-bit (x86_64) | `avctl_Windows_x86_64.zip` |
+
+### macOS / Linux (Homebrew)
+
+```bash
+brew install fetchai/avctl/avctl
+```
+
+### Windows (Chocolatey)
+
+```bash
+choco install avctl
+```
+
+Confirm with `avctl version`. Then `avctl auth login`.
 
 ## Get Started
 
@@ -26,11 +49,12 @@ This repository is intended for hosting the release binaries and any issues or d
 1. Authenticate with Agentverse:
     ```bash
     avctl auth login
-
+    ```
 2. Set Up Your Project Workspace:
     ```bash
     mkdir myagent
     cd myagent
+    ```
 3. Prepare Your Agent:
     At this stage, you have two options to start with your agent:
 
@@ -42,7 +66,7 @@ This repository is intended for hosting the release binaries and any issues or d
     Option B: Retrieve an Existing Agent
     Alternatively, if you wish to work with an existing agent from Agentverse, you can pull it into your local directory:
     ```bash
-    avctl hosting pull <agent_address>
+    avctl hosting pull -a <agent_address>
     ```
     You can get your existing agent addresses by running `avctl hosting get agents`.
     After pulling an existing agent, you can proceed to run any of the listed commands.
@@ -58,13 +82,15 @@ This repository is intended for hosting the release binaries and any issues or d
 1. Authenticate with Agentverse:
     ```bash
     avctl auth login
+    ```
 
 2. Set Up Your Project Workspace:
     ```bash
     mkdir myworkspace
     cd myworkspace
+    ```
 3. Prepare Your Workspace:
-To include all agents in `myworkspace`, ensure each agent folder contains the following three files:
+    To include all agents in `myworkspace`, ensure each agent folder contains the following three files:
 
     1. `agent.py`: Contains the agent's main code.
     2. `pyproject.toml`: Specifies the agent's dependencies.
@@ -91,7 +117,7 @@ Below you'll find a detailed list of avctl commands and their descriptions.
 
 ### Authentication Commands
 
-- `auth login` - Log in to the CLI.
+- `auth login` - Log in to the CLI (optional `--no-browser` to print the sign-in URL without opening a browser).
 - `auth logout` - Log the current user out from the CLI.
 - `auth status` - Show the current authorization status.
 
@@ -121,8 +147,17 @@ These commands are used for individual agent management.
 These commands are designed to manage multiple agents as a workspace.
 
 - `hosting init --workspace`  
-   Initializes the workspace, detecting all agent dependencies in each agent `.env` file, adding them to the configuration file. Make sure to add these manually in the following format: `AGENT_ADDRESS={{ .AgentName.Address }}` when pointing to `agent-name` agent
+  Initializes the workspace, detecting all agent dependencies in each agent `.env` file, adding them to the configuration file. Make sure to add these manually in the following format: `AGENT_ADDRESS={{ .AgentName.Address }}` when pointing to `agent-name` agent
 - `hosting deploy`  
-   Deploys agents based on the configuration file and detected dependencies, deploying agents in the correct order according to their dependencies on one another.
+  Deploys agents based on the configuration file and detected dependencies, deploying agents in the correct order according to their dependencies on one another.
 
 With these commands, `avctl` provides flexibility to manage single agents or entire workspaces, allowing you to efficiently build and manage agents in the Agentverse ecosystem.
+
+## Headless and IDE environments
+
+`avctl auth login` starts a small local server, opens your browser at the Fetch.ai accounts sign-in page, and waits for the redirect.
+
+- The sign-in URL is printed to the terminal immediately; in remote or headless environments, copy it into a local browser.
+- `avctl auth login --no-browser` skips the browser attempt and prints only the URL.
+- While waiting, the command shows no progress; it exits once sign-in completes in the browser.
+- Session tokens expire; when that happens, `avctl auth login` prints a fresh URL and the current status is available via `avctl auth status`.
